@@ -1,18 +1,17 @@
-
-
-Sub Aging1()
-
+Sub AgingLumber()
+' The crystal report merges cells making it to hard 
+' to loop over everything.
 Dim BM As Integer
 
 LastRow = ActiveSheet.Range("B" & Rows.Count).End(xlUp).Row
-    
-'
+
     Cells.Select
     Selection.RowHeight = 16
     Range("B2:M2").Select
     ActiveCell.FormulaR1C1 = _
         "Alliance Lumber SW LLC Customer Aged Balance Summary "
     Range("H10:S400").Select
+    '@TODO add the formatting to the BM loop
     Selection.NumberFormat = "0.00"
     Rows("397:397").Select
     Selection.NumberFormat = "0.00%"
@@ -30,23 +29,32 @@ LastRow = ActiveSheet.Range("B" & Rows.Count).End(xlUp).Row
         .TintAndShade = 0
         .ThemeFont = xlThemeFontNone
     End With
-    
     For BM = 8 To LastRow
         If BM = LastRow Then
-        
-        
+        'So I know what you're thinking,
+        'Where the hell is the loop?
+        'Well this crystal report is just ugly like that.
         Cells(BM - 1, 9).FormulaR1C1 = "=SUM(RC[2]:RC[11])"
+        Cells(BM - 1, 9).NumberFormat = "0.00%"
         Cells(BM - 1, 10).FormulaR1C1 = "=R[-2]C/R[-2]C[-2]"
+        Cells(BM - 1, 10).NumberFormat = "0.00%"
         Cells(BM - 1, 11).FormulaR1C1 = "=R[-2]C/R[-2]C[-3]"
+        Cells(BM - 1, 10).NumberFormat = "0.00%"
         Cells(BM - 1, 12).FormulaR1C1 = "=R[-2]C/R[-2]C[-4]"
+        Cells(BM - 1, 10).NumberFormat = "0.00%"
         Cells(BM - 1, 13).FormulaR1C1 = "=R[-2]C/R[-2]C[-5]"
+        Cells(BM - 1, 10).NumberFormat = "0.00%"
         Cells(BM - 1, 16).FormulaR1C1 = "=R[-2]C[-1]/R[-2]C[-8]"
+        Cells(BM - 1, 10).NumberFormat = "0.00%"
         Cells(BM - 1, 17).FormulaR1C1 = "=R[-2]C/R[-2]C[-9]"
+        Cells(BM - 1, 10).NumberFormat = "0.00%"
         Cells(BM - 1, 18).FormulaR1C1 = "=R[-2]C/R[-2]C[-10]"
+        Cells(BM - 1, 10).NumberFormat = "0.00%"
         Cells(BM - 1, 19).FormulaR1C1 = "=R[-2]C/R[-2]C[-11]"
-        
+        Cells(BM - 1, 10).NumberFormat = "0.00%"
         End If
     Next BM
+
     Application.PrintCommunication = False
     With ActiveSheet.PageSetup
         .PrintTitleRows = ""

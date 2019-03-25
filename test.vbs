@@ -20,3 +20,22 @@ Sub foo()
     If WorksheetFunction.CountA(r.rows(i)) = 0 Then r.rows(i).Add BeforeRow:=Selection.rows(i)
   Next
 End Sub
+
+
+Sub spacing()
+
+    Dim HC As Integer
+    
+    LastRow = ActiveSheet.Range("B" & rows.Count).End(xlUp).Row
+    
+    
+    For HC = 9 To LastRow
+        findme = Cells(HC, 2)
+        If (IsEmpty(findme) = False) Then
+        Cells(HC, 2).Interior.ColorIndex = 3
+        End If
+    
+    Next HC
+
+
+End Sub
